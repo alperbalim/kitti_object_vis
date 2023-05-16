@@ -2,3 +2,6 @@
 imgs
 *.pdf
 *.png
+__pycache__/*
+*.pyc
+
