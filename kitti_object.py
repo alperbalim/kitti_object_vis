@@ -478,7 +478,7 @@ def show_lidar_with_depth(
                 line_width=1,
                 figure=fig,
             )
-    mlab.show(1)
+    mlab.draw()
 
 
 def save_depth0(
@@ -642,7 +642,7 @@ def show_lidar_with_boxes(
                 line_width=1,
                 figure=fig,
             )
-    mlab.show(1)
+    mlab.draw()
 
 
 def box_min_max(box3d):
