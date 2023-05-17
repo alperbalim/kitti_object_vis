@@ -2,7 +2,7 @@
 imgs
 *.pdf
 *.png
-__pycache__/*
+__pycache__/
 *.pyc
 ./__pycache__
 
