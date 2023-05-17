@@ -3,7 +3,7 @@ import time
 import os
 import PyQt5
 import os
-
+# demo for plotting
 
 from kitti_object import kitti_object, show_lidar_with_depth, show_lidar_on_image, \
                          show_image_with_boxes, show_lidar_topview_with_boxes
