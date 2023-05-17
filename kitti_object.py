@@ -9,10 +9,13 @@ import os
 import sys
 import numpy as np
 import cv2
+import PyQt5
+from PIL import Image
 
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = os.path.dirname(PyQt5.__file__) + "/Qt5/plugins/platforms"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(BASE_DIR)
-sys.path.append(os.path.join(ROOT_DIR, "mayavi"))
+#sys.path.append(os.path.join(ROOT_DIR, "mayavi"))
 import kitti_util as utils
 import argparse
 
@@ -173,7 +176,9 @@ def viz_kitti_video():
     for _ in range(len(dataset)):
         img = dataset.get_image(0)
         pc = dataset.get_lidar(0)
-        cv2.imshow("video", img)
+        #cv2.imshow("video", img)
+        pil_img = Image.fromarray(img)
+        pil_img.show(title="video")
         draw_lidar(pc)
         raw_input()
         pc[:, 0:3] = dataset.get_calibration().project_velo_to_rect(pc[:, 0:3])
@@ -233,15 +238,21 @@ def show_image_with_boxes(img, objects, calib, show3d=True, depth=None):
         # box3d_pts_32d = calib.project_velo_to_image(box3d_pts_3d_velo)
         # img3 = utils.draw_projected_box3d(img3, box3d_pts_32d)
     # print("img1:", img1.shape)
-    cv2.imshow("2dbox", img1)
+    #cv2.imshow("2dbox", img1)
+    pil_img1 = Image.fromarray(img1)
+    pil_img1.show(title="2dbox")
     # print("img3:",img3.shape)
     # Image.fromarray(img3).show()
     show3d = True
     if show3d:
         # print("img2:",img2.shape)
-        cv2.imshow("3dbox", img2)
+        #cv2.imshow("3dbox", img2)
+        pil_img2 = Image.fromarray(img2)
+        pil_img2.show(title="3dbox")
     if depth is not None:
-        cv2.imshow("depth", depth)
+        #cv2.imshow("depth", depth)
+        pil_depth = Image.fromarray(depth)
+        pil_depth.show(title="depth")
     
     return img1, img2
 
@@ -312,7 +323,10 @@ def show_image_with_boxes_3type(img, objects, calib, objects2d, name, objects_pr
                 img1, text_lables[n], text_pos, font, 0.5, color, 0, cv2.LINE_AA
             )
 
-    cv2.imshow("with_bbox", img1)
+    #cv2.imshow("with_bbox", img1)
+    pil_img1 = Image.fromarray(img1)
+    pil_img1.show(title="with_bbox")
+    
     cv2.imwrite("imgs/" + str(name) + ".png", img1)
 
 
@@ -696,7 +710,9 @@ def show_lidar_on_image(pc_velo, img, calib, img_width, img_height):
             color=tuple(color),
             thickness=-1,
         )
-    cv2.imshow("projection", img)
+    #cv2.imshow("projection", img)
+    pil_img = Image.fromarray(img)
+    pil_img.show(title="projection")
     return img
 
 
@@ -729,7 +745,9 @@ def show_lidar_topview_with_boxes(pc_velo, objects, calib, objects_pred=None):
             top_image, gt, text_lables=lines, scores=None, thickness=1, is_gt=False
         )
 
-    cv2.imshow("top_image", top_image)
+    #cv2.imshow("top_image", top_image)
+    pil_top_image = Image.fromarray(top_image)
+    pil_top_image.show(title="top_image")
     return top_image
 
 

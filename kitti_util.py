@@ -384,7 +384,7 @@ def load_image(img_filename):
 def load_depth_v(img_filename):
     # return cv2.imread(img_filename)
     disp_img = cv2.imread(img_filename, cv2.IMREAD_UNCHANGED)
-    disp_img = disp_img.astype(np.float)
+    disp_img = disp_img.astype(float)
     return disp_img / 256.0
 
 
@@ -392,7 +392,7 @@ def load_depth0(img_filename):
     # return cv2.imread(img_filename)
     depth_img = np.array(Image.open(img_filename), dtype=int)
 
-    depth_img = depth_img.astype(np.float) / 256.0
+    depth_img = depth_img.astype(float) / 256.0
 
     return depth_img
 
@@ -404,7 +404,7 @@ def load_depth(img_filename):
         isexist = False
         disp_img = np.zeros((370, 1224))
     else:
-        disp_img = disp_img.astype(np.float)
+        disp_img = disp_img.astype(float)
     return disp_img / 256.0, isexist
 
 
